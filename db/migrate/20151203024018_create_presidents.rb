@@ -7,10 +7,6 @@ class CreatePresidents < ActiveRecord::Migration
       t.date :inauguration_date
       t.date :left_office
       t.date :death_date
-      t.time :age_at_inauguration
-      t.time :age_at_retirement
-      t.time :age_at_death
-      t.time :length_of_retirement
 
       t.timestamps null: false
     end

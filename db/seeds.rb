@@ -21,16 +21,16 @@ presidents.each do |president|
 	prez.name_firstlast = president.elements[1].children[1].text
 	prez.birth_date = president.elements[2].children[0].text
 	prez.inauguration_date = president.elements[3].children[0].text
-	prez.left_office = president.elements[5].children[0].text
+	prez.left_office = president.elements[5].children[0].text if president.elements[5].children[0]
 	prez.death_date = president.elements[8].children[0].text
-	prez.age_at_inauguration = president.elements[4].children[2].text
-	# prez.age_at_retirement = president.elements[6].children[2].text
-	prez.length_of_retirement = president.elements[7].children[1].text
-	prez.age_at_death = president.elements[9].children[0].text
-	# age_in_months_years = president.elements[9].children[2].text
 	prez.save
 end
 
+	# prez.age_at_inauguration = president.elements[4].children[2].text
+	# prez.age_at_retirement = president.elements[6].children[2].text
+	# prez.length_of_retirement = president.elements[7].children[1].text
+	# prez.age_at_death = president.elements[9].children[0].text
+	# age_in_months_years = president.elements[9].children[2].text
 
 
-url2 = "https://en.wikipedia.org/wiki/Living_Presidents_of_the_United_States"
+# url2 = "https://en.wikipedia.org/wiki/Living_Presidents_of_the_United_States"
