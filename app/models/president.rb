@@ -14,4 +14,9 @@
 #
 
 class President < ActiveRecord::Base
+
+  def retirement_in_days
+    (self.death_date - self.left_office).to_i
+  end
+
 end
