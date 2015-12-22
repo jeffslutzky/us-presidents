@@ -56,7 +56,7 @@
 	Chart.defaults = {
 		global: {
 			// Boolean - Whether to animate the chart
-			animation: true,
+			animation: false,
 
 			// Number - Number of animation steps
 			animationSteps: 60,
@@ -3079,7 +3079,7 @@
 			helpers.each(this.segments,function(segment){
 				segment.save();
 			});
-			
+
 			this.reflow();
 			this.render();
 		},
