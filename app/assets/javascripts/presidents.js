@@ -11,9 +11,9 @@ function makeChart(presidents) {
     datasets: [
       {
         label: 'Retirement Lengths of U.S. Presidents',
-        fillColor: 'lightskyblue',
+        fillColor: 'red',
         strokeColor: 'rgba(220,220,220,0.8)',
-        highlightFill: 'red',
+        highlightFill: 'blue',
         highlightStroke: 'rgba(220,220,220,1)',
         data: presidents.days
       }
