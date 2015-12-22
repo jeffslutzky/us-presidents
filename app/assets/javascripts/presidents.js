@@ -22,8 +22,8 @@ function makeChart(presidents) {
   };
   var myBarChart = new Chart(ctx).Bar(data, {
     scaleOverride : true,
-    scaleSteps : 26,
-    scaleStepWidth : 500,
+    scaleSteps : 13,
+    scaleStepWidth : 1000,
     scaleStartValue : 0
   });
 };
