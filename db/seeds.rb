@@ -18,11 +18,11 @@ presidents.pop
 presidents.each do |president|
 	prez = President.create
 	prez.name_lastfirst = president.elements[1].children[0].text
-	prez.name_firstlast = president.elements[1].children[1].text
+	prez.name_firstlast = president.elements[1].children.last.text
 	prez.birth_date = president.elements[2].children[0].text
 	prez.inauguration_date = president.elements[3].children[0].text
-	prez.left_office = president.elements[5].children[0].text if president.elements[5].children[0]
-	prez.death_date = president.elements[8].children[0].text
+	president.elements[5].children[0] ? prez.left_office = president.elements[5].children[0].text : prez.left_office = Date.today
+	president.elements[8].children[0].text < "2007-01-01" ? prez.death_date = president.elements[8].children[0].text : prez.death_date = Date.today
 	prez.save
 end
 
