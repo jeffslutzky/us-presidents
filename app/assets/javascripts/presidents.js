@@ -4,6 +4,7 @@ $(function() {
   });
 });
 
+
 function makeChart(presidents) {
   var ctx = $("#myChart").get(0).getContext("2d");
   var data = {
