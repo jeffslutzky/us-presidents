@@ -4,3 +4,14 @@
 .container {
   font-family: "Verdana";
 }
+
+
+#myChart rect {
+  fill: blue;
+}
+
+#myChart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}

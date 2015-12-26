@@ -23,4 +23,5 @@ class President < ActiveRecord::Base
     end
   end
 
+
 end

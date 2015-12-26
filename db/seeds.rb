@@ -23,13 +23,16 @@ presidents.each do |president|
 	prez.inauguration_date = president.elements[3].children[0].text
 	president.elements[5].children[0] ? prez.left_office = president.elements[5].children[0].text : prez.left_office = Date.today
 	prez.death_date = president.elements[8].children[0].text
+	president.elements[9].children[0] ? prez.age_at_death = president.elements[9].children[0].text : prez.age_at_death = Date.today - prez.birth_date
+	prez.age_at_inauguration = president.elements[4].children[2].text
 	prez.save
 end
 
-	# prez.age_at_inauguration = president.elements[4].children[2].text
+# age_at_death = president.elements[9].children[0].text.slice(0..-8).gsub(",", "").to_i
+# or (Date.today - prez.birth_date).to_i
+
 	# prez.age_at_retirement = president.elements[6].children[2].text
 	# prez.length_of_retirement = president.elements[7].children[1].text
-	# prez.age_at_death = president.elements[9].children[0].text
 	# age_in_months_years = president.elements[9].children[2].text
 
 
