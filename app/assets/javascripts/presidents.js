@@ -4,29 +4,6 @@ $(function() {
   });
 });
 
-function makeChart(presidents) {
-  var ctx = $("#myChart").get(0).getContext("2d");
-  var data = {
-    labels: presidents.names,
-    datasets: [
-      {
-        label: 'Retirement Lengths of U.S. Presidents',
-        fillColor: 'red',
-        strokeColor: 'rgba(220,220,220,0.8)',
-        highlightFill: 'blue',
-        highlightStroke: 'rgba(220,220,220,1)',
-        data: presidents.days
-      }
-    ]
-  };
-  var myBarChart = new Chart(ctx).Bar(data, {
-    scaleOverride : true,
-    scaleSteps : 13,
-    scaleStepWidth : 1000,
-    scaleStartValue : 0
-  });
-};
-
 
 function d3Chart(presidents){
   var data = presidents.days;
@@ -52,12 +29,20 @@ function d3Chart(presidents){
       .orient("left")
       .ticks(10);
 
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+      return d + " days";
+    })
+
   var chart = d3.select("#myChart")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  chart.call(tip);
 
   var barWidth = width / data.length;
 
@@ -69,13 +54,9 @@ function d3Chart(presidents){
   bar.append("rect")
       .attr("y", function(d) { return y(d); })
       .attr("height", function(d) { return height - y(d) + 1; })
-      .attr("width", barWidth - 1);
-  //
-  // bar.append("text")
-  //     .attr("x", barWidth / 2 + 11)
-  //     .attr("y", function(d) { return y(d) -17; })
-  //     .attr("dy", ".75em")
-  //     .text(function(d) { return d; });
+      .attr("width", barWidth - 1)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
   chart.append("g")
       .attr("class", "x axis")
