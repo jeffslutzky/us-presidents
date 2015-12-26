@@ -16,7 +16,9 @@
 class President < ActiveRecord::Base
 
   def retirement_in_days
-    if self.death_date > Date.parse("2007-01-01")
+    if self.left_office > Date.parse("2009-01-20")
+      0
+    elsif self.death_date > Date.parse("2007-01-01")
       (Date.today - self.left_office).to_i
     else
       (self.death_date - self.left_office).to_i
