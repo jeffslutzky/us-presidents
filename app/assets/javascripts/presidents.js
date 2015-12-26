@@ -17,9 +17,9 @@ function d3Chart(presidents){
       .rangeRoundBands([0, width], .1);
 
   var y = d3.scale.linear()
-    .domain([0, d3.max(data)])
+    .domain([0, Math.ceil(d3.max(data)/1000)*1000])
     .range([height, 0]);
-
+debugger;
   var xAxis = d3.svg.axis()
       .scale(x)
       .orient("bottom");
