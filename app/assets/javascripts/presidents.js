@@ -1,11 +1,11 @@
 $(function() {
   $.getJSON('', function(data){
-  retirementsChronological(data);
+  retirements(data);
   });
 });
 
 
-function retirementsChronological(presidents){
+function retirements(presidents){
   var data = presidents.days;
 
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
