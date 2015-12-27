@@ -78,4 +78,18 @@ function retirements(presidents){
       .attr("dx","-15em")
       .style("text-anchor", "end")
       .text("Days");
+
+      var sortBars = function() {
+
+        chart.selectAll("rect")
+           .sort(function(a, b) {
+                 return d3.descending(a, b);
+           })
+           .transition()
+           .duration(1000)
+           .attr("x", function(d, i) {
+                 return xScale(i);
+           });
+
+};
 };
