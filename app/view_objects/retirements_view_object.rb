@@ -10,4 +10,8 @@ class RetirementsViewObject
     end
   end
 
+  def get_data_sorted
+    get_data.sort_by { |k, v| v }.reverse.to_h
+  end
+
 end

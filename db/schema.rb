@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203024018) do
+ActiveRecord::Schema.define(version: 20151224001533) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "presidents", force: :cascade do |t|
     t.string   "name_firstlast"
@@ -20,8 +23,10 @@ ActiveRecord::Schema.define(version: 20151203024018) do
     t.date     "inauguration_date"
     t.date     "left_office"
     t.date     "death_date"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "age_at_death"
+    t.integer  "age_at_inauguration"
   end
 
 end

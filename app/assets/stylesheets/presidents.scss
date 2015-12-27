@@ -1,6 +1,50 @@
 // Place all the styles related to the Presidents controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .container {
   font-family: "Verdana";
+  margin-top: 40px;
+}
+
+#myChart {
+  margin-top: 20px;
+}
+
+#myChart rect {
+  fill: blue;
+}
+
+#myChart rect:hover {
+  fill: red;
+}
+
+#myChart text {
+  fill: black;
+  font: 12px sans-serif;
+  text-anchor: end;
+}
+
+.axis text {
+  font: 10px serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-family: sans-serif;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 8px;
 }

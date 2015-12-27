@@ -1,5 +1,12 @@
 <div class="container">
-<h2>Presidents: Length of Retirement in Days</h2>
-<h4>(as of <%= Date.today.try(:strftime, '%b. %d, %Y') %>)</h4>
-<canvas id="myChart" width="1000" height="650"></canvas>
+<h2>Presidents: Length of Retirement, in Days</h2>
+<h4>(as of today, <%= Date.today.try(:strftime, '%b. %d, %Y') %>)</h4>
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary active">
+    <input type="radio" name="options" id="chronological" autocomplete="off" checked> Chronological
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="descending" autocomplete="off"> Descending
+  </label>
 </div>
+<svg id="myChart"></svg>
