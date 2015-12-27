@@ -1,11 +1,25 @@
 $(function() {
+  $("#chronological").on("click", function(){
+    $.getJSON('', function(data){
+      $("#myChart").empty();
+      retirements(data.chronological);
+    });
+  });
+  $("#descending").on("click", function(){
+    $.getJSON('', function(data){
+      $("#myChart").empty();
+      retirements(data.descending);
+    });
+  });
   $.getJSON('', function(data){
-  d3Chart(data);
+    retirements(data.chronological);
   });
 });
 
 
-function d3Chart(presidents){
+
+
+function retirements(presidents){
   var data = presidents.days;
 
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
