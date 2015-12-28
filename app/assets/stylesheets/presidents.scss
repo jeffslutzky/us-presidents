@@ -7,26 +7,26 @@
   margin-top: 40px;
 }
 
-#myChart {
+svg {
   margin-top: 20px;
 }
 
-#myChart rect {
+svg rect {
   fill: blue;
 }
 
-#myChart rect:hover {
+svg rect:hover {
   fill: red;
 }
 
-#myChart text {
+svg text {
   fill: black;
   font: 12px sans-serif;
   text-anchor: end;
 }
 
 .axis text {
-  font: 10px serif;
+  font: 10px sans-serif;
 }
 
 .axis path,

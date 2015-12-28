@@ -1,9 +1,27 @@
 $(function() {
   $.getJSON('', function(data){
-  retirements(data);
+    retirements(data);
   });
+
 });
 
+// $(function() {
+//   $("#chronological").on("click", function(){
+//     $.getJSON('', function(data){
+//       $("#myChart").empty();
+//       retirements(data.chronological);
+//     });
+//   });
+//   $("#descending").on("click", function(){
+//     $.getJSON('', function(data){
+//       $("#myChart").empty();
+//       retirements(data.descending);
+//     });
+//   });
+//   $.getJSON('', function(data){
+//     retirements(data.chronological);
+//   });
+// });
 
 function retirements(presidents){
   var data = presidents.days;
@@ -36,29 +54,29 @@ function retirements(presidents){
       return d + " days";
     })
 
-  var chart = d3.select("#myChart")
+  var svg = d3.select(".container")
+      .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  chart.call(tip);
+  svg.call(tip);
 
   var barWidth = width / data.length;
 
-  var bar = chart.selectAll("g")
+  svg.selectAll("rect")
       .data(data)
-    .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
-
-  bar.append("rect")
+    .enter().append("rect")
+    // this might be affected:
+      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
       .attr("y", function(d) { return y(d); })
       .attr("height", function(d) { return height - y(d) + 1; })
       .attr("width", barWidth - 1)
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
-  chart.append("g")
+  svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
@@ -68,7 +86,7 @@ function retirements(presidents){
         .attr("dy", ".55em")
         .attr("transform", "rotate(-50)" );
 
-  chart.append("g")
+  svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
@@ -79,17 +97,18 @@ function retirements(presidents){
       .style("text-anchor", "end")
       .text("Days");
 
-      var sortBars = function() {
+  var sortBars = function() {
+    svg.selectAll("rect")
+      .sort(function(a, b) {
+        return d3.descending(a, b);
+       })
+      .transition()
+      .duration(1000)
+      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+  };
 
-        chart.selectAll("rect")
-           .sort(function(a, b) {
-                 return d3.descending(a, b);
-           })
-           .transition()
-           .duration(1000)
-           .attr("x", function(d, i) {
-                 return xScale(i);
-           });
 
-};
+   $("#descending").on("click", function(){
+     sortBars();
+    });
 };
