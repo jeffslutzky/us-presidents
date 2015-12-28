@@ -5,37 +5,19 @@ $(function() {
 
 });
 
-// $(function() {
-//   $("#chronological").on("click", function(){
-//     $.getJSON('', function(data){
-//       $("#myChart").empty();
-//       retirements(data.chronological);
-//     });
-//   });
-//   $("#descending").on("click", function(){
-//     $.getJSON('', function(data){
-//       $("#myChart").empty();
-//       retirements(data.descending);
-//     });
-//   });
-//   $.getJSON('', function(data){
-//     retirements(data.chronological);
-//   });
-// });
-
 function retirements(presidents){
-  var data = presidents.days;
+  var data = presidents;
 
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
       width = 1100 - margin.left - margin.right,
       height = 650 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
-      .domain(presidents.names)
-      .rangeRoundBands([0, width], .1);
+      .domain(data.names)
+      .rangeBands([0, width], .1);
 
   var y = d3.scale.linear()
-    .domain([0, Math.ceil(d3.max(data)/1000)*1000])
+    .domain([0, Math.ceil(d3.max(data.days)/1000)*1000])
     .range([height, 0]);
 
   var xAxis = d3.svg.axis()
@@ -63,10 +45,10 @@ function retirements(presidents){
 
   svg.call(tip);
 
-  var barWidth = width / data.length;
+  var barWidth = width / data.days.length;
 
   svg.selectAll("rect")
-      .data(data)
+      .data(data.days)
     .enter().append("rect")
     // this might be affected:
       .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
@@ -82,8 +64,8 @@ function retirements(presidents){
       .call(xAxis)
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".55em")
+        .attr("dx", "-.7em")
+        .attr("dy", ".25em")
         .attr("transform", "rotate(-50)" );
 
   svg.append("g")
@@ -97,10 +79,16 @@ function retirements(presidents){
       .style("text-anchor", "end")
       .text("Days");
 
+  var sortOrder = false;
+
   var sortBars = function() {
     svg.selectAll("rect")
       .sort(function(a, b) {
-        return d3.descending(a, b);
+        if (sortOrder) {
+          return d3.descending(a, b);
+        } else {
+          return d3;
+        }
        })
       .transition()
       .duration(1000)
@@ -108,7 +96,13 @@ function retirements(presidents){
   };
 
 
-   $("#descending").on("click", function(){
-     sortBars();
-    });
-};
+  $("#descending").on("click", function(){
+   sortOrder = true;
+   sortBars();
+  });
+
+  $("#chronological").on("click", function(){
+    sortOrder = false;
+    sortBars();
+   });
+  };
