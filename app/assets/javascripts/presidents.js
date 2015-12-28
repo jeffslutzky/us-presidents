@@ -64,7 +64,7 @@ function retirements(presidents){
       .call(xAxis)
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.7em")
+        .attr("dx", "-.9em")
         .attr("dy", ".25em")
         .attr("transform", "rotate(-50)" );
 
@@ -93,6 +93,15 @@ function retirements(presidents){
       .transition()
       .duration(1000)
       .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+
+    svg.select(".x.axis")
+    .call(xAxis)
+    .selectAll(".tick")
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.9em")
+      .attr("dy", ".25em")
+      .attr("transform", "rotate(-50)" );
   };
 
 
