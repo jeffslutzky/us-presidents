@@ -1,4 +1,4 @@
-$(document).on('page:load', function() {
+$(function() {
   $.getJSON('', function(data){
     retirements(data);
   });
