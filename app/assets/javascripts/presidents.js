@@ -7,14 +7,14 @@ $(function() {
 
 function retirements(data){
   d3.json("index.json", function(error, data) {
-
+debugger;
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
       width = 1100 - margin.left - margin.right,
       height = 650 - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
-      .domain(data.map(function(d) { return d[1] } ))
-      .rangeBands([0, width], .1);
+      .domain(data.map(function(d) { return d[1]; } ))
+      .rangeBands([0, width]);
 
   var yScale = d3.scale.linear()
     .domain([0, Math.ceil(d3.max(data, function(d) { return d[2] } )/1000)*1000])
@@ -78,6 +78,8 @@ function retirements(data){
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
+    })};
+
   // d3.select("#descending").on("click", change);
   //
   // var sortTimeout = setTimeout(function() {
@@ -109,7 +111,6 @@ function retirements(data){
 //         .delay(delay);
 //   }
 
-})};
 
 
 
