@@ -7,7 +7,7 @@ $(function() {
 
 function retirements(data){
   d3.json("index.json", function(error, data) {
-debugger;
+
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
       width = 1100 - margin.left - margin.right,
       height = 650 - margin.top - margin.bottom;
@@ -45,8 +45,6 @@ debugger;
 
   svg.call(tip);
 
-  var barWidth = width / data.length;
-
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -71,14 +69,14 @@ debugger;
   svg.selectAll("rect")
       .data(data)
     .enter().append("rect")
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+      .attr("transform", function(d, i) { return "translate(" + i * xScale.rangeBand() + ",0)"; })
       .attr("y", function(d) { return yScale(d[2]); })
       .attr("height", function(d) { return height - yScale(d[2]) + 1; })
-      .attr("width", barWidth - 1)
+      .attr("width", xScale.rangeBand()-1)
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
-    })};
+})};
 
   // d3.select("#descending").on("click", change);
   //
@@ -88,7 +86,7 @@ debugger;
 //
 //   function change() {
 //     clearTimeout(sortTimeout);
-// debugger;
+//
 //     var x0 = x.domain(data.sort(this.checked
 //         ? function(a, b) { return b[2] - a[2]; }
 //         : function(a, b) { return a[2] - b[2]; })
