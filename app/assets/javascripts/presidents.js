@@ -13,7 +13,7 @@ function retirements(data){
       height = 650 - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
-      .domain(data, function(d) { return d[1] } )
+      .domain(data.map(function(d) { return d[1] } ))
       .rangeBands([0, width], .1);
 
   var yScale = d3.scale.linear()
