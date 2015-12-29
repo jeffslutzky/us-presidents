@@ -1,6 +1,8 @@
 <div class="container">
 <h2>Presidents: Length of Retirement, in Days</h2>
 <h4>(as of today, <%= Date.today.try(:strftime, '%b. %d, %Y') %>)</h4>
+<h6>made with <%= link_to "d3.js", "http://d3js.org" %></h6>
+<h7>(if no chart appears, it might be a problem with heroku, which I'm trying to fix;<br />download my <%= link_to "github code", "https://github.com/jeffslutzky/us-presidents" %>, run rake db:seed, and load the page locally)</h7>
 <!-- <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-primary active">
     <input type="radio" name="options" id="chronological" autocomplete="off" checked> Chronological
