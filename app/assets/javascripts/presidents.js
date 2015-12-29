@@ -76,45 +76,69 @@ function retirements(data){
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
+  var sortOrder = false;
+
+  var sortBars = function() {
+
+    if (sortOrder) {
+      var sorted = data.sort(function(a, b) {
+        return d3.descending(a[2], b[2]);
+      })
+    } else {
+      var sorted = data.sort(function(a, b) {
+        return d3.ascending(a[0], b[0])
+      })
+    };
+
+    xScale.domain(sorted.map(function(d) {
+      return d[1];
+    }));
+
+    svg.selectAll("rect")
+      .sort(function(a, b) {
+        if (sortOrder) {
+          return d3.descending(a[2], b[2]);
+        } else {
+          return d3.ascending(a[0], b[0]);
+        }
+      });
+
+    var transition = svg.transition().duration(750),
+      delay = function(d, i) {
+        return i * 50;
+      };
+
+    transition.select(".x.axis")
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.9em")
+      .attr("dy", ".25em")
+      .attr("transform", "rotate(-50)")
+;
+
+    transition.selectAll("rect")
+      .attr("transform", function(d, i) {
+        return "translate(" + i * xScale.rangeBand() + ",0)";
+    });
+
+  };
+
+  $("#descending").on("click", function(){
+    sortOrder = true;
+    sortBars();
+  });
+
+  $("#chronological").on("click", function(){
+    sortOrder = false;
+    sortBars();
+  });
+
 })};
 
-  // d3.select("#descending").on("click", change);
-  //
-  // var sortTimeout = setTimeout(function() {
-  //   d3.select("#descending").property("checked", true).each(change);
-  // }, 2000);
-//
-//   function change() {
-//     clearTimeout(sortTimeout);
-//
-//     var x0 = x.domain(data.sort(this.checked
-//         ? function(a, b) { return b[2] - a[2]; }
-//         : function(a, b) { return a[2] - b[2]; })
-//         .map(function(d) { return d[1]; }))
-//         .copy();
-//
-//     svg.selectAll("rect")
-//         .sort(function(a, b) { return x0(a[0]) - x0(b[0]); });
-//
-//     var transition = svg.transition().duration(750),
-//         delay = function(d, i) { return i * 50; };
-//
-//     transition.selectAll("rect")
-//         .delay(delay)
-//         .attr("x", function(d) { return x0(d[1]); });
-//
-//     transition.select(".x.axis")
-//         .call(xAxis)
-//       .selectAll("g")
-//         .delay(delay);
-//   }
 
 
 
-
-//
-//   var sortOrder = false;
-//
 //   var sortBars = function() {
 //     svg.selectAll("rect")
 //       .sort(function(a, b) {
@@ -142,13 +166,3 @@ function retirements(data){
 //
 //     };
 //
-//   $("#descending").on("click", function(){
-//     sortOrder = true;
-//     sortBars();
-//   });
-//
-//   $("#chronological").on("click", function(){
-//     sortOrder = false;
-//     sortBars();
-//   });
-// };
