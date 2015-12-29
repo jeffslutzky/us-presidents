@@ -5,27 +5,27 @@ $(function() {
 
 });
 
-function retirements(presidents){
-  var data = presidents;
+function retirements(data){
+  d3.json("index.json", function(error, data) {
 
   var margin = {top: 20, right: 20, bottom: 180, left: 80},
       width = 1100 - margin.left - margin.right,
       height = 650 - margin.top - margin.bottom;
 
-  var x = d3.scale.ordinal()
-      .domain(data.names)
+  var xScale = d3.scale.ordinal()
+      .domain(data, function(d) { return d[1] } )
       .rangeBands([0, width], .1);
 
-  var y = d3.scale.linear()
-    .domain([0, Math.ceil(d3.max(data.days)/1000)*1000])
+  var yScale = d3.scale.linear()
+    .domain([0, Math.ceil(d3.max(data, function(d) { return d[2] } )/1000)*1000])
     .range([height, 0]);
 
   var xAxis = d3.svg.axis()
-      .scale(x)
+      .scale(xScale)
       .orient("bottom");
 
   var yAxis = d3.svg.axis()
-      .scale(y)
+      .scale(yScale)
       .orient("left")
       .ticks(10);
 
@@ -33,11 +33,11 @@ function retirements(presidents){
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d) {
-      return d + " days";
+      return d[2] + " days";
     })
 
   var svg = d3.select(".container")
-      .append("svg")
+    .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -45,18 +45,7 @@ function retirements(presidents){
 
   svg.call(tip);
 
-  var barWidth = width / data.days.length;
-
-  svg.selectAll("rect")
-      .data(data.days)
-    .enter().append("rect")
-    // this might be affected:
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-      .attr("y", function(d) { return y(d); })
-      .attr("height", function(d) { return height - y(d) + 1; })
-      .attr("width", barWidth - 1)
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+  var barWidth = width / data.length;
 
   svg.append("g")
       .attr("class", "x axis")
@@ -79,39 +68,88 @@ function retirements(presidents){
       .style("text-anchor", "end")
       .text("Days");
 
-  var sortOrder = false;
-
-  var sortBars = function() {
-    svg.selectAll("rect")
-      .sort(function(a, b) {
-        if (sortOrder) {
-          return d3.descending(a, b);
-        } else {
-          return d3;
-        }
-       })
-      .transition()
-      .duration(1000)
+  svg.selectAll("rect")
+      .data(data)
+    .enter().append("rect")
       .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+      .attr("y", function(d) { return yScale(d[2]); })
+      .attr("height", function(d) { return height - yScale(d[2]) + 1; })
+      .attr("width", barWidth - 1)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
-    svg.select(".x.axis")
-    .call(xAxis)
-    .selectAll(".tick")
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.9em")
-      .attr("dy", ".25em")
-      .attr("transform", "rotate(-50)" );
-  };
+  // d3.select("#descending").on("click", change);
+  //
+  // var sortTimeout = setTimeout(function() {
+  //   d3.select("#descending").property("checked", true).each(change);
+  // }, 2000);
+//
+//   function change() {
+//     clearTimeout(sortTimeout);
+// debugger;
+//     var x0 = x.domain(data.sort(this.checked
+//         ? function(a, b) { return b[2] - a[2]; }
+//         : function(a, b) { return a[2] - b[2]; })
+//         .map(function(d) { return d[1]; }))
+//         .copy();
+//
+//     svg.selectAll("rect")
+//         .sort(function(a, b) { return x0(a[0]) - x0(b[0]); });
+//
+//     var transition = svg.transition().duration(750),
+//         delay = function(d, i) { return i * 50; };
+//
+//     transition.selectAll("rect")
+//         .delay(delay)
+//         .attr("x", function(d) { return x0(d[1]); });
+//
+//     transition.select(".x.axis")
+//         .call(xAxis)
+//       .selectAll("g")
+//         .delay(delay);
+//   }
+
+})};
 
 
-  $("#descending").on("click", function(){
-   sortOrder = true;
-   sortBars();
-  });
 
-  $("#chronological").on("click", function(){
-    sortOrder = false;
-    sortBars();
-   });
-  };
+//
+//   var sortOrder = false;
+//
+//   var sortBars = function() {
+//     svg.selectAll("rect")
+//       .sort(function(a, b) {
+//         if (sortOrder) {
+//           return d3.descending(a, b);
+//         } else {
+//           return d3;
+//         }
+//        })
+//       .transition()
+//       .duration(1000)
+//       .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+//
+//       svg.select(".x.axis").selectAll("g")
+//         .sort(function(a, b) {
+//           if (sortOrder) {
+//             return d3.ascending(a.id, b.id);
+//           } else {
+//             return d3;
+//           }
+//          })
+//         .transition()
+//         .duration(1000)
+//         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+//
+//     };
+//
+//   $("#descending").on("click", function(){
+//     sortOrder = true;
+//     sortBars();
+//   });
+//
+//   $("#chronological").on("click", function(){
+//     sortOrder = false;
+//     sortBars();
+//   });
+// };
