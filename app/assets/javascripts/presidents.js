@@ -29,12 +29,12 @@ function retirements(data){
         .orient("left")
         .ticks(10);
 
-    var tip = d3.tip()
-      .attr('class', 'd3-tip')
-      .offset([-10, 0])
-      .html(function(d) {
-        return d[1] + ": " + d[2];
-      })
+    // var tip = d3.tip()
+    //   .attr('class', 'd3-tip')
+    //   .offset([-10, 0])
+    //   .html(function(d) {
+    //     return d[1] + ": " + d[2];
+    //   })
 
     var svg = d3.select(".container")
       .append("svg")
@@ -43,7 +43,7 @@ function retirements(data){
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.call(tip);
+    // svg.call(tip);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -73,8 +73,8 @@ function retirements(data){
         .attr("y", function(d) { return yScale(d[2]); })
         .attr("height", function(d) { return height - yScale(d[2]) + 1; })
         .attr("width", xScale.rangeBand()-1)
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
+        // .on('mouseover', tip.show)
+        // .on('mouseout', tip.hide);
 
     var sortOrder = false;
 
