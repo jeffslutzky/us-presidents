@@ -11646,18 +11646,18 @@ return jQuery;
 // Tooltips for d3.js SVG visualizations
 
 (function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module with d3 as a dependency.
-    define(['d3'], factory)
-  } else if (typeof module === 'object' && module.exports) {
-    // CommonJS
-    module.exports = function(d3) {
-      d3.tip = factory(d3)
-      return d3.tip
-    }
-  } else {
-    // Browser global.
-    root.d3.tip = factory(root.d3)
+  // if (typeof define === 'function' && define.amd) {
+  //   // AMD. Register as an anonymous module with d3 as a dependency.
+  //   define(['d3'], factory)
+  // } else if (typeof module === 'object' && module.exports) {
+  //   // CommonJS
+  //   module.exports = function(d3) {
+  //     d3.tip = factory(d3)
+  //     return d3.tip
+  //   }
+  // } else {
+  //   // Browser global.
+  //   root.d3.tip = factory(root.d3)
   }
 }(this, function (d3) {
 
@@ -15182,7 +15182,7 @@ function retirements(data){
 			helpers.each(this.segments,function(segment){
 				segment.save();
 			});
-			
+
 			this.reflow();
 			this.render();
 		},
@@ -15590,8 +15590,3 @@ function retirements(data){
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
-
-
-
-
