@@ -11658,7 +11658,7 @@ return jQuery;
   // } else {
   //   // Browser global.
   //   root.d3.tip = factory(root.d3)
-  }
+  // }
 }(this, function (d3) {
 
   // Public - contructs a new tooltip
