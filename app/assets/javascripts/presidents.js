@@ -105,7 +105,7 @@ function retirements(data){
 
       var transition = svg.transition().duration(750),
         delay = function(d, i) {
-          return i * 50;
+          return i * 500;
         };
 
       transition.select(".x.axis")
