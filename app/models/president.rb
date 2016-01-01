@@ -25,5 +25,13 @@ class President < ActiveRecord::Base
     end
   end
 
+  def lifespan
+    if self.death_date > Date.parse("2007-01-01")
+      (Date.today - self.birth_date).to_i
+    else
+      (self.death_date - self.birth_date).to_i
+    end
+  end
+
 
 end
