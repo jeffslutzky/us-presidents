@@ -4,7 +4,7 @@
 <h2>Presidential Data Charts</h2>
 <h5>data as of <%= Date.today.try(:strftime, '%b. %e, %Y') %> (automatically updates daily)</h5>
 <h6>made with <%= link_to "d3.js", "http://d3js.org" %> by <%= link_to "Jeff Slutzky", "http://jeffslutzky.com" %></h6>
-<h6>mouse over a bar to see more data</h6>
+<h6>mouse over a bar to see statistic</h6>
 </div>
 
 
@@ -12,7 +12,7 @@
 <p>
   <%= form_tag do %>
   <%= label_tag(:which_chart, "Choose a chart:") %><br />
-  <%= select_tag(:chart, options_for_select([["Age at inauguration", 1], ["Retirement", 2], ["Lifespan", 3]])) %>
+  <%= select_tag(:chart, options_for_select([["Age at inauguration", 1], ["Length of presidency", 2], ["Retirement", 3], ["Lifespan", 4]])) %>
 <% end %>
 </p>
 <!--end of menu-->

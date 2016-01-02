@@ -41,4 +41,8 @@ class President < ActiveRecord::Base
     (self.inauguration_date - self.birth_date).to_i
   end
 
+  def presidency_length
+    (self.left_office - self.inauguration_date).to_i
+  end
+
 end
