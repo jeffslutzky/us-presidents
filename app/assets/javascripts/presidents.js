@@ -1,5 +1,6 @@
 $(function() {
   $.getJSON('', function(data){
+    debugger;
     retirements(data);
   });
 

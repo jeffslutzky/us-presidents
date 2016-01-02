@@ -15,10 +15,14 @@
 
 class President < ActiveRecord::Base
 
+  def alive?
+    self.death_date > Date.parse("2007-01-01")
+  end
+
   def retirement_in_days
-    if self.left_office > Date.parse("2009-01-20")
+    if self.left_office > Date.parse("2009-01-20") # Obama
       0
-    elsif self.death_date > Date.parse("2007-01-01")
+    elsif alive?
       (Date.today - self.left_office).to_i
     else
       (self.death_date - self.left_office).to_i
@@ -26,7 +30,7 @@ class President < ActiveRecord::Base
   end
 
   def lifespan
-    if self.death_date > Date.parse("2007-01-01")
+    if alive?
       (Date.today - self.birth_date).to_i
     else
       (self.death_date - self.birth_date).to_i
