@@ -23,7 +23,6 @@ presidents.each do |president|
 	prez.inauguration_date = president.elements[3].children[0].text
 	president.elements[5].children[0] ? prez.left_office = president.elements[5].children[0].text : prez.left_office = Date.today
 	prez.death_date = president.elements[8].children[0].text
-	prez.age_at_inauguration = president.elements[4].children[2].text
 	prez.save
 end
 
