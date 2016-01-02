@@ -1,4 +1,5 @@
 <div class="container">
+
 <div class="header">
 <h2>Presidential Data Charts</h2>
 <h5>data as of <%= Date.today.try(:strftime, '%b. %e, %Y') %> (automatically updates daily)</h5>
@@ -11,12 +12,12 @@
 <p>
   <%= form_tag do %>
   <%= label_tag(:which_chart, "Choose a chart:") %><br />
-  <%= select_tag(:chart, options_for_select([["Retirement lengths", 1], ["Lifespan lengths", 2]])) %>
+  <%= select_tag(:chart, options_for_select([["Retirement lengths", 1], ["Lifespan lengths", 2], ["Age at inauguration", 3]])) %>
 <% end %>
 </p>
 <!--end of menu-->
 
-  <div>
+  <div class="sort">
     Sort:<br />
     <label>
       <input type="radio" name="options" id="chronological" autocomplete="off" checked> Chronological
@@ -24,8 +25,8 @@
     <label>
       <input type="radio" name="options" id="descending" autocomplete="off"> Descending
     </label>
+    <h6>red = alive; blue = deceased</h6>
   </div>
 
-<h6>red = alive; blue = deceased</h6>
 
-</div
+</div>

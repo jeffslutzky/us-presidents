@@ -10,35 +10,30 @@
 }
 
 /* line 14, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
-.btn {
-  background-color: blue;
+.sort {
+  margin-bottom: 20px;
 }
 
-/* line 18, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
-svg {
-  margin-top: 20px;
-}
-
-/* line 22, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 21, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 svg rect:hover {
   fill: yellow;
   stroke: black;
   stroke-width: 2;
 }
 
-/* line 28, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 27, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 svg text {
   fill: black;
   font: 12px sans-serif;
   text-anchor: end;
 }
 
-/* line 34, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 33, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 .axis text {
   font: 10px sans-serif;
 }
 
-/* line 38, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 37, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 .axis path,
 .axis line {
   fill: none;
@@ -46,12 +41,12 @@ svg text {
   shape-rendering: crispEdges;
 }
 
-/* line 45, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 44, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 .x.axis path {
   display: none;
 }
 
-/* line 49, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
+/* line 48, /Users/jeffslutzky/Development/us_presidents/app/assets/stylesheets/presidents.scss */
 .d3-tip {
   line-height: 1;
   font-family: sans-serif;

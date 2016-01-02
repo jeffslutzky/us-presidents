@@ -37,5 +37,8 @@ class President < ActiveRecord::Base
     end
   end
 
+  def age_at_inauguration
+    (self.inauguration_date - self.birth_date).to_i
+  end
 
 end
