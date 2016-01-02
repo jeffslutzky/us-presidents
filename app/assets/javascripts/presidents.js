@@ -1,12 +1,17 @@
 $(function() {
   $.getJSON('', function(data){
-    debugger;
-    retirements(data);
+    index = 2;
+    chart(data);
+    $("#chart").change(function(){
+      index = parseInt($("#chart").val()) + 1
+      $("svg").remove();
+      chart(data);
+    });
   });
 
 });
 
-function retirements(data){
+function chart(data){
   d3.json("index.json", function(error, data) {
 
     var margin = {top: 20, right: 20, bottom: 180, left: 80},
@@ -18,7 +23,7 @@ function retirements(data){
         .rangeBands([0, width]);
 
     var yScale = d3.scale.linear()
-      .domain([0, Math.ceil(d3.max(data, function(d) { return d[2] } )/1000)*1000])
+      .domain([0, Math.ceil(d3.max(data, function(d) { return d[index] } )/1000)*1000])
       .range([height, 0]);
 
     var xAxis = d3.svg.axis()
@@ -34,7 +39,7 @@ function retirements(data){
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return d[1] + ": " + d[2];
+        return d[1] + ": " + d[index];
       })
 
     var svg = d3.select(".container")
@@ -71,8 +76,8 @@ function retirements(data){
         .data(data)
       .enter().append("rect")
         .attr("transform", function(d, i) { return "translate(" + i * xScale.rangeBand() + ",0)"; })
-        .attr("y", function(d) { return yScale(d[2]); })
-        .attr("height", function(d) { return height - yScale(d[2]) + 1; })
+        .attr("y", function(d) { return yScale(d[index]); })
+        .attr("height", function(d) { return height - yScale(d[index]) + 1; })
         .attr("width", xScale.rangeBand()-1)
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide);
@@ -83,7 +88,7 @@ function retirements(data){
 
       if (sortOrder) {
         var sorted = data.sort(function(a, b) {
-          return d3.descending(a[2], b[2]);
+          return d3.descending(a[index], b[index]);
         })
       } else {
         var sorted = data.sort(function(a, b) {
@@ -98,7 +103,7 @@ function retirements(data){
       svg.selectAll("rect")
         .sort(function(a, b) {
           if (sortOrder) {
-            return d3.descending(a[2], b[2]);
+            return d3.descending(a[index], b[index]);
           } else {
             return d3.ascending(a[0], b[0]);
           }
