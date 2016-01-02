@@ -19,12 +19,10 @@ svg {
   margin-top: 20px;
 }
 
-svg rect {
-  fill: blue;
-}
-
 svg rect:hover {
-  fill: red;
+  fill: yellow;
+  stroke: black;
+  stroke-width: 3;
 }
 
 svg text {

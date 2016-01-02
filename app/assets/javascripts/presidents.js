@@ -1,10 +1,11 @@
 $(function() {
   $.getJSON('', function(data){
-    index = 2;
+    index = 3;
     chart(data);
     $("#chart").change(function(){
-      index = parseInt($("#chart").val()) + 1
+      index = parseInt($("#chart").val()) + 2
       $("svg").remove();
+      $("#chronological").prop("checked", true);
       chart(data);
     });
   });
@@ -79,6 +80,13 @@ function chart(data){
         .attr("y", function(d) { return yScale(d[index]); })
         .attr("height", function(d) { return height - yScale(d[index]) + 1; })
         .attr("width", xScale.rangeBand()-1)
+        .attr("fill", function(d) {
+          if (d[2]==true) {
+            return "red"
+          } else {
+            return "blue"
+          }
+        })
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide);
 
