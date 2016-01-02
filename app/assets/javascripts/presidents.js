@@ -2,9 +2,11 @@ $(function() {
   $.getJSON('', function(data){
     index = 3;
     chart(data);
-    $("#chart").change(function(){
+    $("select").change(function(event){
+      event.preventDefault();
       index = parseInt($("#chart").val()) + 2
       $("svg").remove();
+      $(".d3-tip").remove();
       $("#chronological").prop("checked", true);
       chart(data);
     });
@@ -40,7 +42,7 @@ function chart(data){
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return d[1] + ": " + d[index];
+        return d[1] + ": " + d[index] + " days<br/>(" + d3.round(d[index]/365.0, 2) + " years)";
       })
 
     var svg = d3.select(".container")
