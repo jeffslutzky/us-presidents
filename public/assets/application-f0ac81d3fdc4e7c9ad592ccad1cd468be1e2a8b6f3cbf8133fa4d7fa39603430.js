@@ -12291,7 +12291,7 @@ function chart(data){
       .offset([-10, 0])
       .html(function(d) {
         // return d[1] + ": " + d[index] + " days<br/>(" + d3.round(d[index]/365.0, 2) + " years)";
-        return d[1] + ": ~" + d3.round(d[index]/365.0, 2) + " years<br/>(" + d[index] + " days)";
+        return d[1] + ": " + d3.round(d[index]/365.25, 2) + " years<br/>(" + d[index] + " days)";
       })
 
     var svg = d3.select(".container")
