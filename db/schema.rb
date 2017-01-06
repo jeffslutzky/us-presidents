@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160102045633) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "presidents", force: :cascade do |t|
     t.string   "name_firstlast"
     t.string   "name_lastfirst"

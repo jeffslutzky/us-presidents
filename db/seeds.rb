@@ -11,27 +11,18 @@ require 'open-uri'
 
 url = "https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States_by_age"
 doc = Nokogiri::HTML(open(url))
-presidents = doc.css("table").first.css("tr")
+# presidents = doc.css("table").first.css("tr")
+presidents = doc.css(".sortable").first.elements
 presidents.shift
 presidents.pop
-
+presidents.pop # leave out post-Obama for now
 presidents.each do |president|
 	prez = President.create
 	prez.name_lastfirst = president.elements[1].children[0].text
 	prez.name_firstlast = president.elements[1].children.last.text
 	prez.birth_date = president.elements[2].children[0].text
 	prez.inauguration_date = president.elements[3].children[0].text
-	president.elements[5].children[0] ? prez.left_office = president.elements[5].children[0].text : prez.left_office = Date.today
+	prez.left_office = president.elements[5].children[0].text if president.elements[5].children[0]
 	prez.death_date = president.elements[8].children[0].text
 	prez.save
 end
-
-# age_at_death = president.elements[9].children[0].text.slice(0..-8).gsub(",", "").to_i
-# or (Date.today - prez.birth_date).to_i
-
-	# prez.age_at_retirement = president.elements[6].children[2].text
-	# prez.length_of_retirement = president.elements[7].children[1].text
-	# age_in_months_years = president.elements[9].children[2].text
-
-
-# url2 = "https://en.wikipedia.org/wiki/Living_Presidents_of_the_United_States"
