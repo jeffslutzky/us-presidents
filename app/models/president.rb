@@ -20,7 +20,7 @@ class President < ActiveRecord::Base
   end
 
   def retirement_in_days
-    if !self.left_office # Obama
+    if !self.left_office # incumbent
       0
     elsif alive?
       (Date.today - self.left_office).to_i
@@ -42,7 +42,7 @@ class President < ActiveRecord::Base
   end
 
   def presidency_length
-    if !self.left_office # Obama
+    if !self.left_office # incumbent
       (Date.today - self.inauguration_date).to_i
     else
       (self.left_office - self.inauguration_date).to_i

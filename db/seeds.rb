@@ -15,7 +15,6 @@ doc = Nokogiri::HTML(open(url))
 presidents = doc.css(".sortable").first.elements
 presidents.shift
 presidents.pop
-presidents.pop # leave out post-Obama for now
 presidents.each do |president|
 	prez = President.create
 	prez.name_lastfirst = president.elements[1].children[0].text
